@@ -82,10 +82,12 @@
                             </button>
                         </li>
                         <li>
-                            <a th:onclick="'showLogin()'">登录</a>
+<!--                            <a th:onclick="'showLogin()'">登录</a>-->
+                            <a th:onclick="'openLogin()'">登录</a>
                         </li>
                         <li>
-                            <a th:onclick="'showSignup()'">注册</a>
+<!--                            <a th:onclick="'showSignup()'">注册</a>-->
+                            <a th:onclick="'openRegister()'">注册</a>
                         </li>
                     </ul>
                 </div>
@@ -128,47 +130,106 @@
                 </div>
             </div>
         </div>
+
+        <!--注册-->
+        <div class="site-text" style="margin: 5%; display: none" id="register_model" >
+            <form class="layui-form" lay-filter="example" id="register_form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">手机号</label>
+                    <div class="layui-input-block">
+                        <input type="text" required="required" name="phone" lay-verify="title" autocomplete="off" placeholder="请输入手机号" class="layui-input" pattern="^1[0-9]{10}$"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名</label>
+                    <div class="layui-input-block">
+                        <input type="text" required="required" name="username" lay-verify="title" autocomplete="off" placeholder="请输入用户名" class="layui-input"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">密码</label>
+                    <div class="layui-input-block">
+                        <input type="password" required="required" name="password" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-block">
+                        <input type="text" required="required" name="email" lay-verify="title" autocomplete="off" placeholder="请输入邮箱" class="layui-input"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <button type="button" class="btn" onclick="register()" style="margin-top: 20px;width: 360px;font-size: larger">注册</button>
+                </div>
+            </form>
+        </div>
+
+        <!--登录-->
+        <div class="site-text" style="margin: 5%; display: none" id="login_model" >
+            <form class="layui-form" lay-filter="example" id="login_from">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">手机号</label>
+                    <div class="layui-input-block">
+                        <input type="text" required="required" name="phone" lay-verify="title" autocomplete="off" placeholder="请输入手机号" class="layui-input" pattern="^1[0-9]{10}$"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">密码</label>
+                    <div class="layui-input-block">
+                        <input type="text" required="required" name="password" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <button type="button" class="btn" style="margin-top: 20px;width: 360px;font-size: larger">登录</button>
+                </div>
+            </form>
+        </div>
+
         <!--
             描述：注册
         -->
-        <div ng-controller="signupController" class="ng-scope">
-            <div id="signup-show" class="signup stark-components">
-                <div class="publish-box z-depth-4">
-                    <div class="row">
-                        <a th:onclick="'showSignup()'">
-                            <div class="col s12 title"></div>
-                        </a>
-                        <form th:action="@{/user/addUser}" method="post" commandName="user" role="form">
-                            <div class="input-field col s12">
-                                <input type="text" name="username" required="required"
-                                       class="validate ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"/>
-                                <label>昵称</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <input type="text" name="phone" required="required" pattern="^1[0-9]{10}$"
-                                       class="validate ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"/>
-                                <label>手机</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <input type="password" name="password" required="required"
-                                       class="validate ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"/>
-                                <label>密码</label>
-                            </div>
-                            <div ng-show="checkTelIsShow" class="col s12">
-                                <button type="submit" class="waves-effect waves-light btn verify-btn red lighten-1">
-                                    <i class="iconfont left"></i>
-                                    <em>点击注册</em>
-                                </button>
-                            </div>
-                            <div ng-show="checkTelIsShow" class="login-area col s12">
-                                <em>已有账号？去</em>
-                                <a th:onclick="'showLogin()'">登录</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!--        <div ng-controller="signupController" class="ng-scope">-->
+<!--            <div id="signup-show" class="signup stark-components">-->
+<!--                <div class="publish-box z-depth-4">-->
+<!--                    <div class="row">-->
+<!--                        <a th:onclick="'showSignup()'">-->
+<!--                            <div class="col s12 title"></div>-->
+<!--                        </a>-->
+<!--                        <form commandName="user" role="form" id="register_form">-->
+<!--                            <div class="input-field col s12">-->
+<!--                                <input type="text" name="username" required="required"-->
+<!--                                       class="validate ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"/>-->
+<!--                                <label>昵称</label>-->
+<!--                            </div>-->
+<!--                            <div class="input-field col s12">-->
+<!--                                <input type="text" name="phone" required="required" pattern="^1[0-9]{10}$"-->
+<!--                                       class="validate ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"/>-->
+<!--                                <label>手机</label>-->
+<!--                            </div>-->
+<!--                            <div class="input-field col s12">-->
+<!--                                <input type="password" name="password" required="required"-->
+<!--                                       class="validate ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"/>-->
+<!--                                <label>密码</label>-->
+<!--                            </div>-->
+<!--                            <div ng-show="checkTelIsShow" class="col s12">-->
+<!--&lt;!&ndash;                                <button type="submit" class="waves-effect waves-light btn verify-btn red lighten-1">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <i class="iconfont left"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <em>点击注册</em>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </button>&ndash;&gt;-->
+<!--                                <button onclick="register()" class="waves-effect waves-light btn verify-btn red lighten-1">-->
+<!--                                    <i class="iconfont left"></i>-->
+<!--                                    <em>点击注册</em>-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                            <div ng-show="checkTelIsShow" class="login-area col s12">-->
+<!--                                <em>已有账号？去</em>-->
+<!--                                <a th:onclick="'showLogin()'">登录</a>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <!--
             描述：更改用户名
         -->

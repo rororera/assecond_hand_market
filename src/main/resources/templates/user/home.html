@@ -34,16 +34,16 @@
                     <img src="" />
                 </div>
                 <span class="name" th:text="${cur_user.username}"></span>
-                <span class="school">广东财经大学</span>
+                <span class="school">阿坝师范学院</span>
                 <span class="name" th:text="'闲置数量：'+${cur_user.goodsNum}"></span>
                 <span class="fa fa-share-alt">"快去分享一下"</span>
             </div>
             <div class="home_nav">
                 <ul>
-                    <a href="">
+                    <a th:href="@{/user/home}">
                         <li class="notice">
                             <div></div>
-                            <span>我的消息</span>
+                            <span>我的首页</span>
                             <strong></strong>
                         </li>
                     </a>
@@ -78,27 +78,11 @@
             <div class="share">
                 <div class="publish">
                     <div class="pub_content">
-                        <div class="text_pub lead emoji-picker-container">
-                            <input type="text" name="text" data-emojiable="converted" class="form-control" data-type="original-input" style="display: none;"/>
-                            <div class="emoji-wysiwyg-editor form-control" data-type="input" contenteditable="true"></div>
-                            <i class="emoji-picker-icon emoji-picker face" data-type="picker"></i>
-                            <div class="tag"></div>
-                        </div>
-                        <div class="img_pub">
-                            <ul></ul>
-                        </div>
-                    </div>
-                    <div class="button">
-                        <!-- TODO::上传图片 -->
-                        <span class="fa fa-image">
-                            ::before
-                            <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png" multiple="" />
-                        </span>
-                        <div class="checkbox">
-                            <button>发 布</button>
-                        </div>
+                        123123123
                     </div>
                 </div>
+
+
                 <!--
                     描述：闲置商品展示
                 -->
