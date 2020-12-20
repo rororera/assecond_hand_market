@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <header>
+        <div ng-controller="headerController" class="header stark-components navbar-fixed ng-scope">
+            <nav class="white nav1">
+                <div class="nav-wrapper">
+                    <a th:href="@{/goods/homeGoods}" class="logo">
+                        <em class="em1">123</em>
+                        <em class="em1">
+                            <span style="color: #4b82c3;">1</span>
+                            <span style="color: #ffd51f;">2</span>
+                            <span style="color: #b02b1a;">3</span>
+                        </em>
+                        <em class="em2">二手工坊</em>
+                        <em class="em3">
+                            <span style="color: #d80000;">g</span>
+                            <span style="color: #48bdff;">d</span>
+                            <span style="color: #ea83ee;">u</span>
+                            <span style="color: #50dd5a;">f</span>
+                            <span style="color: #ee9946;">e</span>
+                            .market
+                        </em>
+                        <!--<em class="em3">gdufe.market</em>-->
+                    </a>
+                    <div class="nav-wrapper search-bar">
+                        <form ng-submit="search()" class="ng-pristine ng-invalid ng-invalid-required"
+                              th:action="@{/goods/search}">
+                            <div class="input-field" style="width: 500px">
+                                <label for="search" class="active">
+                                    <i class="iconfont"></i>
+                                </label>
+                                <input id="search" name="str" placeholder="搜点什么吧..." style="height: 40px;width: 400px"
+                                       class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"/>
+                                <button data-position="bottom" class="blue lighten-1 waves-effect waves-light btn" onclick="search()" style="margin:0 0 5px 10px">
+                                    搜索
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="right" th:if="${cur_user != null}">
+                        <li class="publish-btn">
+                            <button data-position="bottom" class="red lighten-1 waves-effect waves-light btn">
+                                <a th:href="@{/goods/publishGoods}">我要发布</a>
+                            </button>
+                        </li>
+<!--                        <li>-->
+<!--                            <a th:href="@{/user/allGoods}">我发布的商品</a>-->
+<!--                        </li>-->
+                        <li>
+                            <a th:text="${cur_user.username}"></a>
+                        </li>
+<!--                        <li class="notification">-->
+<!--                            <i ng-click="showNotificationBox()" class="iconfont"></i>-->
+<!--                            <div ng-show="notification.tagIsShow"-->
+<!--                                 class="notification-amount red lighten-1 ng-binding ng-hide">0-->
+<!--                            </div>-->
+<!--                        </li>-->
+                        <li class="changemore">
+                            <a class="changeMoreVertShow()">
+                                <i class="iconfont"></i>
+                            </a>
+                            <div class="more-vert">
+                                <ul class="dropdown-content">
+                                    <li><a th:href="@{/user/home}">个人中心</a></li>
+                                    <li><a>消息</a></li>
+                                    <li><a th:onclick="'ChangeName()'">更改用户名</a></li>
+                                    <li><a th:href="@{/user/logout}">退出登录</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="right" th:if="${cur_user == null}">
+                        <li class="publish-btn">
+                            <!--<button ng-click="showLogin()" data-position="bottom" data-delay="50"-->
+                            <!--data-tooltip="需要先登录哦！" class="red lighten-1 waves-effect waves-light btn" data-tooltip-id="510d3084-e666-f82f-3655-5eae4304a83a"	>-->
+                            <!--我要发布</button>-->
+                            <button th:onclick="'showLogin()'" data-position="bottom" data-delay="50"
+                                    data-tooltip="需要先登录哦！" class="red lighten-1 waves-effect waves-light btn"
+                                    data-tooltip-id="510d3084-e666-f82f-3655-5eae4304a83a">
+                                我要发布
+                            </button>
+                        </li>
+                        <li>
+                            <a th:onclick="'showLogin()'">登录</a>
+                        </li>
+                        <li>
+                            <a th:onclick="'showSignup()'">注册</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <!--
+    描述：登录
+-->
+        <div ng-controller="loginController" class="ng-scope">
+            <div id="login-show" class="login stark-components">
+                <div class="publish-box z-depth-4">
+                    <div class="row">
+                        <a th:onclick="'showLogin()'">
+                            <div class="col s12 title"></div>
+                        </a>
+                        <form th:action="@{/user/login}" method="post" commandName="user" role="form">
+                            <div class="input-field col s12">
+                                <input type="text" name="phone" required="required" pattern="^1[0-9]{10}$"
+                                       class="validate ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"/>
+                                <label>手机</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="password" name="password" required="required"
+                                       class="validate ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"/>
+                                <label>密码</label>
+                                <a ng-click="showForget()" class="forget-btn">忘记密码？</a>
+                            </div>
+                            <button type="submit" class="waves-effect waves-light btn login-btn red lighten-1">
+                                <i class="iconfont left"></i>
+                                <em>登录</em>
+                            </button>
+                            <div class="col s12 signup-area">
+                                <em>没有账号？赶快</em>
+                                <a th:onclick="'showSignup()'" class="signup-btn">注册</a>
+                                <em>吧！</em>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+            描述：注册
+        -->
+        <div ng-controller="signupController" class="ng-scope">
+            <div id="signup-show" class="signup stark-components">
+                <div class="publish-box z-depth-4">
+                    <div class="row">
+                        <a th:onclick="'showSignup()'">
+                            <div class="col s12 title"></div>
+                        </a>
+                        <form th:action="@{/user/addUser}" method="post" commandName="user" role="form">
+                            <div class="input-field col s12">
+                                <input type="text" name="username" required="required"
+                                       class="validate ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"/>
+                                <label>昵称</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="text" name="phone" required="required" pattern="^1[0-9]{10}$"
+                                       class="validate ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"/>
+                                <label>手机</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="password" name="password" required="required"
+                                       class="validate ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"/>
+                                <label>密码</label>
+                            </div>
+                            <div ng-show="checkTelIsShow" class="col s12">
+                                <button type="submit" class="waves-effect waves-light btn verify-btn red lighten-1">
+                                    <i class="iconfont left"></i>
+                                    <em>点击注册</em>
+                                </button>
+                            </div>
+                            <div ng-show="checkTelIsShow" class="login-area col s12">
+                                <em>已有账号？去</em>
+                                <a th:onclick="'showLogin()'">登录</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+            描述：更改用户名
+        -->
+        <div ng-controller="changeNameController" class="ng-scope">
+            <div id="changeName" class="change-name stark-components">
+                <div class="publish-box z-depth-4">
+                    <div class="row">
+                        <div class="col s12 title">
+                            <h1>修改用户名</h1>
+                        </div>
+                        <form th:action="@{/user/changeName}" method="post" commandName="user" role="form">
+                            <div class="input-field col s12">
+                                <input type="text" name="username" required="required"
+                                       class="validate ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"/>
+                                <label>修改用户名</label>
+                            </div>
+                            <div ng-show="checkTelIsShow" class="col s12">
+                                <button class="waves-effect waves-light btn publish-btn red lighten-1">
+                                    <i class="iconfont left"></i>
+                                    <em>确认</em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</head>
+</html>

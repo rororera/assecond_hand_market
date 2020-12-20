@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>阿师校园二手交易平台</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+
+    <!--<script type="text/javascript" th:src="@{/js/jquery.js}" ></script>-->
+    <script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}" ></script>
+
+<!--    <script type="text/javascript" th:src="@{/js/materialize.min.js}" ></script>-->
+<!--    <script type="text/javascript" th:src="@{/js/index.bundle.js}" ></script>-->
+<!--    <link rel="stylesheet" th:href="@{/css/materialize-icon.css}" />-->
+    <script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}" ></script>
+    <script type="text/javascript" th:src="@{/js/materialize.min.js}" ></script>
+    <script type="text/javascript" th:src="@{/js/index.bundle.js}" ></script>
+    <link rel="stylesheet" th:href="@{/css/materialize-icon.css}" />
+    <link rel="stylesheet" th:href="@{/css/user.css}" />
+</head>
+    <script>
+        function showLogin() {
+            if($("#signup-show").css("display")=='block'){
+                $("#signup-show").css("display","none");
+            }
+            if($("#login-show").css("display")=='none'){
+                $("#login-show").css("display","block");
+            }else{
+                $("#login-show").css("display","none");
+            }
+        }
+        function showSignup() {
+            if($("#login-show").css("display")=='block'){
+                $("#login-show").css("display","none");
+            }
+            if($("#signup-show").css("display")=='none'){
+                $("#signup-show").css("display","block");
+            }else{
+                $("#signup-show").css("display","none");
+            }
+        }
+        function ChangeName() {
+            if($("#changeName").css("display")=='none'){
+                $("#changeName").css("display","block");
+            }else{
+                $("#changeName").css("display","none");
+            }
+        }
+    </script>
+    <!-- TODO::IDEA关于thymeleaf的支持红色波浪线 -->
+<body ng-view="ng-view">
+<!--
+    描述：顶部
+-->
+
+<div th:include="/goods/navication"></div>
+
+<!--
+    描述：左侧导航条
+-->
+<div ng-controller="sidebarController" class="sidebar stark-components ng-scope">
+    <li ng-class="{true: 'active'}[isAll]">
+        <a th:href="@{/goods/catelog/1}" class="index">
+            <img th:src="@{/img/index.png}" />
+            <em>最新发布</em>
+        </a>
+    </li>
+    <li ng-class="{true: 'active'}[isDigital]">
+        <a th:href="@{/goods/catelog/1}" class="digital">
+            <img th:src="@{/img/digital.png}"  />
+            <em>闲置数码</em>
+        </a>
+    </li>
+    <li ng-class="{true: 'active'}[isRide]">
+        <a th:href="@{/goods/catelog/2}" class="ride">
+            <img th:src="@{/img/ride.png}"/>
+            <em>校园代步</em>
+        </a>
+    </li>
+    <li ng-class="{true: 'active'}[isCommodity]">
+        <a th:href="@{/goods/catelog/3}" class="commodity">
+            <img th:src="@{/img/commodity.png}"/>
+            <em>电器日用</em>
+        </a>
+    </li>
+    <li ng-class="{true: 'active'}[isBook]">
+        <a th:href="@{/goods/catelog/4}" class="book">
+            <img th:src="@{/img/book.png}"/>
+            <em>图书教材</em>
+        </a>
+    </li>
+    <li ng-class="{true: 'active'}[isMakeup]">
+        <a th:href="@{/goods/catelog/5}" class="makeup">
+            <img th:src="@{/img/makeup.png}"/>
+            <em>美妆衣物</em>
+        </a>
+    </li>
+    <li ng-class="{true: 'active'}[isSport]">
+        <a th:href="@{/goods/catelog/6}" class="sport">
+            <img th:src="@{/img/sport.png}"/>
+            <em>运动棋牌</em>
+        </a>
+    </li>
+    <li ng-class="{true: 'active'}[isSmallthing]">
+        <a th:href="@{/goods/catelog/7}" class="smallthing">
+            <img th:src="@{/img/smallthing.png}"/>
+            <em>其它物品</em>
+        </a>
+    </li>
+    <div class="info">
+        <a href="" target="_blank">关于我们</a><em>-</em>
+        <a href="">联系我们</a>
+        <p>QQ：123456789</p>
+        <p>©2020 阿师校园二手交易平台</p>
+    </div>
+</div>
+<!--
+    描述：右侧显示部分
+-->
+<div class="main-content">
+    <!--
+        描述：最新发布
+    -->
+    <div class="index-title">
+        <a href="" th:text="${catelog.name}"></a>
+        <hr class="hr1" />
+        <hr class="hr2" />
+    </div>
+    <div class="waterfoo stark-components row">
+        <div class="item-wrapper normal" th:each="item : ${goodsExtendList}">
+            <div class="card col">
+                <a th:href="@{'/goods/goodsId/'+${item.goods.id}}">
+                    <div class="card-image">
+                        <img th:src="@{'/upload/'+${item.images[0].imgUrl}}" />
+                    </div>
+                    <div class="card-content item-price" th:text="${item.goods.price}"></div>
+                    <div class="card-content item-name">
+                        <p th:text="${item.goods.name}"></p>
+                    </div>
+                    <div class="card-content item-location">
+                        <p>阿坝师范学院</p>
+                        <p th:text="${item.goods.startTime}"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
