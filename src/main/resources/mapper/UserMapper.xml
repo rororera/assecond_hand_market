@@ -7,14 +7,16 @@
         <result column="username" property="username" jdbcType="VARCHAR" />
         <result column="password" property="password" jdbcType="CHAR" />
         <result column="QQ" property="qq" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
         <result column="create_at" property="createAt" jdbcType="VARCHAR" />
         <result column="goods_num" property="goodsNum" jdbcType="INTEGER" />
         <result column="power" property="power" jdbcType="TINYINT" />
         <result column="last_login" property="lastLogin" jdbcType="VARCHAR" />
         <result column="status" property="status" jdbcType="TINYINT" />
+        <result column="verycode" property="verycode" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Base_Column_List" >
-        id, phone, username, password, QQ, create_at, goods_num, power, last_login, status
+        id, phone, username, password, QQ, email, create_at, goods_num, power, last_login, status, verycode
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
@@ -52,13 +54,13 @@
     </delete>
     <insert id="insert" parameterType="com.squirrel.pojo.User" >
         insert into t_shop_user (id, phone, username,
-        password, QQ, create_at,
+        password, QQ, email, create_at,
         goods_num, power, last_login,
-        status)
+        status, verycode)
         values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=CHAR}, #{username,jdbcType=VARCHAR},
-        #{password,jdbcType=CHAR}, #{qq,jdbcType=VARCHAR}, #{createAt,jdbcType=VARCHAR},
+        #{password,jdbcType=CHAR}, #{qq,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createAt,jdbcType=VARCHAR},
         #{goodsNum,jdbcType=INTEGER}, #{power,jdbcType=TINYINT}, #{lastLogin,jdbcType=VARCHAR},
-        #{status,jdbcType=TINYINT})
+        #{status,jdbcType=TINYINT}, #{verycode,jdbcType=VARCHAR},)
     </insert>
     <insert id="insertSelective" parameterType="com.squirrel.pojo.User" >
         insert into t_shop_user
@@ -77,6 +79,9 @@
             </if>
             <if test="qq != null" >
                 QQ,
+            </if>
+            <if test="email != null" >
+                email,
             </if>
             <if test="createAt != null" >
                 create_at,
@@ -110,6 +115,9 @@
             <if test="qq != null" >
                 #{qq,jdbcType=VARCHAR},
             </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
             <if test="createAt != null" >
                 #{createAt,jdbcType=VARCHAR},
             </if>
@@ -142,6 +150,9 @@
             <if test="qq != null" >
                 QQ = #{qq,jdbcType=VARCHAR},
             </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
             <if test="createAt != null" >
                 create_at = #{createAt,jdbcType=VARCHAR},
             </if>
@@ -166,6 +177,7 @@
         username = #{username,jdbcType=VARCHAR},
         password = #{password,jdbcType=CHAR},
         QQ = #{qq,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
         create_at = #{createAt,jdbcType=VARCHAR},
         goods_num = #{goodsNum,jdbcType=INTEGER},
         power = #{power,jdbcType=TINYINT},
