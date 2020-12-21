@@ -9,6 +9,8 @@ public class User {
 
     private String password;
 
+    private String email;
+
     private String qq;
 
     private String createAt;
@@ -20,6 +22,8 @@ public class User {
     private String lastLogin;
 
     private Byte status;
+
+    private String verycode;
 
     public Integer getId() {
         return id;
@@ -85,12 +89,20 @@ public class User {
         this.power = power;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getLastLogin() {
         return lastLogin;
     }
 
     public void setLastLogin(String lastLogin) {
-        this.lastLogin = lastLogin == null ? null : lastLogin.trim();
+        this.lastLogin = lastLogin;
     }
 
     public Byte getStatus() {
@@ -101,19 +113,11 @@ public class User {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", phone='" + phone + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", qq='" + qq + '\'' +
-                ", createAt='" + createAt + '\'' +
-                ", goodsNum=" + goodsNum +
-                ", power=" + power +
-                ", lastLogin='" + lastLogin + '\'' +
-                ", status=" + status +
-                '}';
+    public String getVerycode() {
+        return verycode;
+    }
+
+    public void setVerycode(String verycode) {
+        this.verycode = verycode;
     }
 }
