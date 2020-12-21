@@ -29,12 +29,28 @@ function openRegister(){
     });
 }
 
+function openPwdModel(){
+    layer.open({
+        type: 1 //Page层类型
+        ,skin: 'layui-layer-molv'
+        ,area: ['400px', '600px']
+        ,title: ['修改密码','font-size:20px']
+        ,shadeClose: true
+        ,shade: 0.4 //遮罩透明度
+        ,content:$("#pwd_model")
+        ,end: function (){
+            document.getElementById("pwd_from").reset();
+            $('#pwdspan').html();
+        }
+    });
+}
+
 function login() {
     $.ajax({
         type: "post",
         contentType: "application/json",
         dataType: "json",
-        url: "/user/api/login",
+        url: "/user/login",
         data: JSON.stringify($('#login_from').serializeObject()),
         success: function (data) {
             console.log(data);
@@ -44,7 +60,6 @@ function login() {
 }
 
 function register() {
-    console.log($('#register_form').serializeObject())
     $.ajax({
         type: "post",
         contentType: "application/json",
@@ -56,6 +71,29 @@ function register() {
         }
     });
 
+}
+
+function changePwd() {
+    var password = $('#password111').val();
+    var password1 = $('#password222').val();
+    var password2 = $('#password333').val();
+
+    if(password1 != password2){
+        $('#pwdspan').html("两次密码不一致！")
+    }else{
+        $.ajax({
+            type: "post",
+            contentType: "application/json",
+            dataType: "json",
+            url: "/user/changePassword",
+            data: {password : password,
+                password1 : password1,
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
 }
 
 $.fn.serializeObject = function() {

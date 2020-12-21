@@ -45,13 +45,6 @@
                             <strong></strong>
                         </li>
                     </a>
-                    <a th:href="@{/user/basic}">
-                        <li class="set">
-                            <div></div>
-                            <span>个人设置</span>
-                            <strong></strong>
-                        </li>
-                    </a>
                     <a th:href="@{/goods/publishGoods}">
                         <li class="store">
                             <div></div>
@@ -66,6 +59,13 @@
                             <strong></strong>
                         </li>
                     </a>
+                    <a th:href="@{/user/basic}">
+                        <li class="set">
+                            <div></div>
+                            <span>个人设置</span>
+                            <strong></strong>
+                        </li>
+                    </a>
                 </ul>
             </div>
         </div>
@@ -77,8 +77,8 @@
                 <form th:action="@{/user/updateInfo}" method="post" commandName="user" role="form">
                     <h1>完善与修改个人信息</h1><hr />
                     <div class="changeinfo">
-                        <span>昵称：</span>
-                        <input class="in_info" type="text" name="username" placeholder="请输入昵称"
+                        <span>用户名：</span>
+                        <input class="in_info" type="text" name="username" placeholder="请输入用户名"
                                th:value="${cur_user.username}"/>
                     </div><hr />
                     <div class="changeinfo">
@@ -96,6 +96,11 @@
                         <span>QQ：</span>
                         <input class="in_info" type="text" name="qq" placeholder="请输入QQ"
                                th:value="${cur_user.qq}"/>
+                    </div>
+                    <div class="changeinfo">
+                        <span>email：</span>
+                        <input class="in_info" type="text" name="email" placeholder="请输入邮箱"
+                               th:value="${cur_user.email}"/>
                     </div>
                     <input type="submit" class="setting-save" value="保存修改信息" />
                 </form>

@@ -12,9 +12,11 @@
         <result column="power" property="power" jdbcType="TINYINT" />
         <result column="last_login" property="lastLogin" jdbcType="VARCHAR" />
         <result column="status" property="status" jdbcType="TINYINT" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="verycode" property="lastLogin" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Base_Column_List" >
-        id, phone, username, password, QQ, create_at, goods_num, power, last_login, status
+        id, phone, username, password, QQ, create_at, goods_num, power, last_login, status, email, verycode
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
@@ -52,11 +54,11 @@
     </delete>
     <insert id="insert" parameterType="com.squirrel.pojo.User" >
         insert into t_shop_user (id, phone, username,
-        password, QQ, create_at,
+        password, QQ, create_at, email, verycode
         goods_num, power, last_login,
         status)
         values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=CHAR}, #{username,jdbcType=VARCHAR},
-        #{password,jdbcType=CHAR}, #{qq,jdbcType=VARCHAR}, #{createAt,jdbcType=VARCHAR},
+        #{password,jdbcType=CHAR}, #{qq,jdbcType=VARCHAR}, #{createAt,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{verycode,jdbcType=VARCHAR},
         #{goodsNum,jdbcType=INTEGER}, #{power,jdbcType=TINYINT}, #{lastLogin,jdbcType=VARCHAR},
         #{status,jdbcType=TINYINT})
     </insert>

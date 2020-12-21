@@ -30,4 +30,6 @@ public interface UserService {
     List<User> getUsersByIds(List<Integer> ids);
 
     List<User> getUsersByIds(Set<Integer> ids);
+
+    boolean updatePassword(User cur_user);
 }

@@ -64,13 +64,11 @@ public class UserController {
 
     /**
      * 验证登录
-     * @param request
      * @param user
-     * @param modelMap
      * @return
      */
     @RequestMapping(value = "/login")
-    public ModelAndView loginValidate(HttpServletRequest request, HttpServletResponse response, User user, ModelMap modelMap) {
+    public ModelAndView loginValidate(HttpServletRequest request, User user) {
         User cur_user = userService.getUserByPhone(user.getPhone());
         String url=request.getHeader("Referer");
         if(cur_user != null && cur_user.getStatus() == 0) {
@@ -90,11 +88,11 @@ public class UserController {
      */
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
     @ResponseBody
-    public AjaxResult login(HttpServletRequest request, HttpServletResponse response) {
+    public AjaxResult login(@RequestBody User user, HttpServletRequest request) {
         AjaxResult ajaxResult = new AjaxResult();
         try {
-            String phone = request.getParameter("phone");
-            String password = request.getParameter("password");
+            String phone = user.getPhone();
+            String password = user.getPassword();
             User cur_user = userService.getUserByPhone(phone);
             if(cur_user != null) {
                 String pwd = MD5.md5(password);
@@ -216,6 +214,7 @@ public class UserController {
         User cur_user = (User)request.getSession().getAttribute("cur_user");
         cur_user.setUsername(user.getUsername());
         cur_user.setQq(user.getQq());
+        cur_user.setEmail(user.getEmail());
         userService.updateUserName(cur_user);//执行修改操作
         request.getSession().setAttribute("cur_user",cur_user);//修改session值
         return new ModelAndView("redirect:/user/basic");
@@ -279,5 +278,31 @@ public class UserController {
         mv.addObject("goodsAndImage",goodsAndImage);
         mv.setViewName("/user/goods");
         return mv;
+    }
+
+    /**
+     * 修改密码
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/changePassword")
+    public String changePassword(HttpServletRequest request, Model model,
+                                       @RequestParam(value = "password") String password,
+                                       @RequestParam(value = "password1") String password1
+                                       ) {
+        String url=request.getHeader("Referer");
+        ModelAndView mv = new ModelAndView();
+        //从session中获取出当前用户
+        User cur_user = (User)request.getSession().getAttribute("cur_user");
+
+        User user = userService.getUserByPhone(cur_user.getPhone());
+        if (user.getPassword().equals(MD5.md5(password))){
+            model.addAttribute("error","密码验证失败！");
+        }
+
+        cur_user.setPassword(MD5.md5(password1));
+        userService.updatePassword(cur_user);
+        request.getSession().setAttribute("cur_user",cur_user);//修改session值
+        return url;
     }
 }
