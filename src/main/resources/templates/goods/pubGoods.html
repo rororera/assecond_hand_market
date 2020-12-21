@@ -58,17 +58,10 @@
             </div>
             <div class="home_nav">
                 <ul>
-                    <a href="">
-                        <li class="notice">
+                    <a th:href="@{/user/home}">
+                        <li class="home">
                             <div></div>
-                            <span>我的消息</span>
-                            <strong></strong>
-                        </li>
-                    </a>
-                    <a th:href="@{/user/basic}">
-                        <li class="set">
-                            <div></div>
-                            <span>个人设置</span>
+                            <span>我的首页</span>
                             <strong></strong>
                         </li>
                     </a>
@@ -86,11 +79,17 @@
                             <strong></strong>
                         </li>
                     </a>
+                    <a th:href="@{/user/basic}">
+                        <li class="set">
+                            <div></div>
+                            <span>个人设置</span>
+                            <strong></strong>
+                        </li>
+                    </a>
                 </ul>
             </div>
         </div>
         <!--
-	            时间：2018/01/06 23:22:39
 	            描述：发布物品
 	            TODO::上传文件处理
         -->

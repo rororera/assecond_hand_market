@@ -2,6 +2,7 @@ package com.squirrel.controller;
 
 import com.squirrel.common.GgeeConst;
 import com.squirrel.dto.AjaxResult;
+import com.squirrel.dto.PasswordDTO;
 import com.squirrel.exception.GgeeWebError;
 import com.squirrel.pojo.Goods;
 import com.squirrel.pojo.GoodsExtend;
@@ -156,7 +157,6 @@ public class UserController {
     @DeleteMapping("/api/deleteUser/{id}")
     @ResponseBody
     public AjaxResult deleteUser(@PathVariable int id) {
-        AjaxResult ajaxResult = new AjaxResult();
         boolean result = userService.deleteUserById(id);
         return new AjaxResult().setData(result);
     }
@@ -285,24 +285,20 @@ public class UserController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/changePassword")
-    public String changePassword(HttpServletRequest request, Model model,
-                                       @RequestParam(value = "password") String password,
-                                       @RequestParam(value = "password1") String password1
-                                       ) {
-        String url=request.getHeader("Referer");
-        ModelAndView mv = new ModelAndView();
+    @RequestMapping(value = "/changePassword", method= RequestMethod.POST)
+    @ResponseBody
+    public AjaxResult changePassword(HttpServletRequest request,@RequestBody PasswordDTO password) {
         //从session中获取出当前用户
         User cur_user = (User)request.getSession().getAttribute("cur_user");
 
         User user = userService.getUserByPhone(cur_user.getPhone());
-        if (user.getPassword().equals(MD5.md5(password))){
-            model.addAttribute("error","密码验证失败！");
+        if (!user.getPassword().equals(MD5.md5(password.getPassword()))){
+            return new AjaxResult().setState(GgeeWebError.WRONG_PASSWORD);
         }
 
-        cur_user.setPassword(MD5.md5(password1));
+        cur_user.setPassword(MD5.md5(password.getPassword1()));
         userService.updatePassword(cur_user);
         request.getSession().setAttribute("cur_user",cur_user);//修改session值
-        return url;
+        return new AjaxResult().setSuccess(true);
     }
 }

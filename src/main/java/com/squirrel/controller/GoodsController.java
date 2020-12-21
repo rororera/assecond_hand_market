@@ -314,8 +314,8 @@ public class GoodsController {
             //新的图片名称
             String newFileName = UUID.randomUUID() + oldFileName.substring(oldFileName.lastIndexOf("."));
             //新图片
-            File newFile = new File(file_path+"/"+newFileName);
-            //File newFile = new File(file_path+newFileName);
+//            File newFile = new File(file_path+"/"+newFileName);
+            File newFile = new File(file_path+newFileName);
             //将内存中的数据写入磁盘
             myfile.transferTo(newFile);
             //将新图片名称返回到前端

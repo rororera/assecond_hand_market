@@ -108,7 +108,7 @@ var manageUserListPage = {
             || username.replace(/(^s*)|(s*$)/g, "").length == 0) {
             //TODO::信息校验
             $('#loginModalErrorMessage').html('<i class="close icon"></i><div class="header">错误提示</div>\n' +
-                '                <p>'+'昵称不能为空'+'</p>');
+                '                <p>'+'用户名不能为空'+'</p>');
             $('#loginModalErrorMessage').removeClass('hidden');
             return false;
         }
@@ -205,7 +205,7 @@ var manageUserListPage = {
             || username.replace(/(^s*)|(s*$)/g, "").length == 0) {
             //TODO::信息校验
             $('#loginModalErrorMessage').html('<i class="close icon"></i><div class="header">错误提示</div>\n' +
-                '                <p>'+'昵称不能为空'+'</p>');
+                '                <p>'+'用户名不能为空'+'</p>');
             $('#loginModalErrorMessage').removeClass('hidden');
             return false;
         }
