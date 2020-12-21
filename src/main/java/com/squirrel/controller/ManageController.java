@@ -1,5 +1,7 @@
 package com.squirrel.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.squirrel.common.GgeeConst;
 import com.squirrel.dto.AjaxResult;
 import com.squirrel.pojo.Catelog;
@@ -66,24 +68,55 @@ public class ManageController {
         }
     }
 
+//    /**
+//     * 商品管理
+//     */
+//    @RequestMapping(value="/goods/list", method= RequestMethod.GET)
+//    public String goodsList(HttpServletRequest request,
+//                           @RequestParam(value = "page", defaultValue = "1") int page,
+//                           @RequestParam(value = "catelogId", defaultValue = "0") int catelogId,
+//                           @RequestParam(value = "text", required = false) String text,
+//                           Model model) {
+//        User currentUser = (User) request.getSession().getAttribute(GgeeConst.CUR_USER);
+//        model.addAttribute(GgeeConst.CUR_USER, currentUser);
+//        if (currentUser == null || currentUser.getPower() != 90) {
+//            return "/error/404";
+//        } else {
+//            Map<String, Object> data = goodsService.getGoodsByCatelogIdAndNameAndDescrible(
+//                    page, GgeeConst.goodsPageSize, catelogId, text, text
+//            );
+//            List<Goods> goodsList = (List<Goods>) data.get("goodsList");
+//            List<Integer> userIds = goodsList.stream().
+//                    map(Goods::getUserId).collect(Collectors.toList());
+//            List<User> users = userService.getUsersByIds(userIds);
+//            Map<Integer, User> id2user = users.stream().
+//                    collect(Collectors.toMap(User::getId, user -> user));
+//            for (Goods goods : goodsList) {
+//                goods.setUser(id2user.get(goods.getUserId()));
+//            }
+//            List<Catelog> catelogs = catelogService.getAllCatelog();
+//            data.put("catelogs", catelogs);
+//            data.put("catelogId", catelogId);
+//            data.put("text", text);
+//            model.addAttribute(GgeeConst.DATA, data);
+//            return "/manage/manage-goodsList";
+//        }
+//    }
+
     /**
      * 商品管理
      */
     @RequestMapping(value="/goods/list", method= RequestMethod.GET)
     public String goodsList(HttpServletRequest request,
-                           @RequestParam(value = "page", defaultValue = "1") int page,
-                           @RequestParam(value = "catelogId", defaultValue = "0") int catelogId,
-                           @RequestParam(value = "text", required = false) String text,
-                           Model model) {
+                            @RequestParam(value = "page", defaultValue = "1") int page,
+                            Model model) {
         User currentUser = (User) request.getSession().getAttribute(GgeeConst.CUR_USER);
         model.addAttribute(GgeeConst.CUR_USER, currentUser);
         if (currentUser == null || currentUser.getPower() != 90) {
             return "/error/404";
         } else {
-            Map<String, Object> data = goodsService.getGoodsByCatelogIdAndNameAndDescrible(
-                    page, GgeeConst.goodsPageSize, catelogId, text, text
-            );
-            List<Goods> goodsList = (List<Goods>) data.get("goodsList");
+            PageHelper.startPage(page, GgeeConst.goodsPageSize);
+            List<Goods> goodsList = goodsService.getAllGoods();
             List<Integer> userIds = goodsList.stream().
                     map(Goods::getUserId).collect(Collectors.toList());
             List<User> users = userService.getUsersByIds(userIds);
@@ -92,11 +125,9 @@ public class ManageController {
             for (Goods goods : goodsList) {
                 goods.setUser(id2user.get(goods.getUserId()));
             }
-            List<Catelog> catelogs = catelogService.getAllCatelog();
-            data.put("catelogs", catelogs);
-            data.put("catelogId", catelogId);
-            data.put("text", text);
-            model.addAttribute(GgeeConst.DATA, data);
+            PageInfo<Goods> pageInfo = new PageInfo<Goods>(goodsList);
+
+            model.addAttribute(GgeeConst.DATA, pageInfo);
             return "/manage/manage-goodsList";
         }
     }

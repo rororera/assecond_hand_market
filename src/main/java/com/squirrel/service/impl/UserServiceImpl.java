@@ -156,4 +156,13 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsersByIds(Set<Integer> ids) {
         return userMapper.getUsersByIdsSet(ids);
     }
+
+    @Override
+    public boolean updatePassword(User cur_user) {
+        int row = userMapper.updateByPrimaryKey(cur_user);
+        if(row > 0){
+            return true;
+        }
+        return false;
+    }
 }
