@@ -73,4 +73,7 @@ public interface GoodsService {
             int pageNum, int pageSize, int catelogId,
             String name, String describle);
 
+    List<Goods> searchGoodsByName(String goodsName);
+
+    int offGoods(Goods goods);
 }

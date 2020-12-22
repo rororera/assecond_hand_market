@@ -16,6 +16,8 @@
     <script type="text/javascript" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
 
     <script type="text/javascript" th:src="@{/js/zh.js}"></script>
+    <script type="text/javascript" th:src="@{/js/layer/layer.js}" ></script>
+    <link rel="stylesheet" th:href="@{/js/layui/css/layui.css}" />
 
     <style>
         .container{padding-top:10px}
@@ -121,18 +123,22 @@
                             <option value="7">其它物品</option>
                         </select>
                     </div>
+<!--                    <div class="changeinfo" id="dir">-->
+<!--                        <span>商品描述：</span>-->
+<!--                        <div class="sha">-->
+<!--                            <div class="publ">-->
+<!--                                <div class="pub_con">-->
+<!--                                    <div class="text_pu">-->
+<!--                                        <input type="text" name="describle" class="emoji-wysiwyg-editor"-->
+<!--                                               th:value="${goodsExtend.goods.describle}"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="changeinfo" id="dir">
                         <span>商品描述：</span>
-                        <div class="sha">
-                            <div class="publ">
-                                <div class="pub_con">
-                                    <div class="text_pu">
-                                        <input type="text" name="describle" class="emoji-wysiwyg-editor"
-                                               th:value="${goodsExtend.goods.describle}"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <textarea class="in_info" name="describle" th:utext="${goodsExtend.goods.describle}" style="width:380px;height: 150px;resize: none"/>
                     </div>
                     <br />
                     <hr />
@@ -160,5 +166,7 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" th:src="@{/js/usercenter.js}" ></script>
 </body>
 </html>

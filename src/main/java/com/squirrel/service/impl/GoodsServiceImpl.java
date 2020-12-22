@@ -106,6 +106,16 @@ public class GoodsServiceImpl implements GoodsService {
         return data;
     }
 
+    @Override
+    public List<Goods> searchGoodsByName(String goodsName) {
+        return goodsMapper.searchGoodsByName(goodsName);
+    }
+
+    @Override
+    public int offGoods(Goods goods) {
+
+        return goodsMapper.updateByPrimaryKey(goods);
+    }
 
 
 }

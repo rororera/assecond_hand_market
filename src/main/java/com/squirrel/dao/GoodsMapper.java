@@ -103,4 +103,13 @@ public interface GoodsMapper {
      * @return
      */
     List<Goods> getGoodsByUserId(Integer user_id);
+
+    /**
+     * 根据商品名称查找
+     * @param goodsName
+     * @return
+     */
+    List<Goods> searchGoodsByName(@Param("goodsName") String goodsName);
+
+
 }

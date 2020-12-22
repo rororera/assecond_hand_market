@@ -16,8 +16,8 @@
     <script type="text/javascript" th:src="@{/js/materialize.min.js}" ></script>
     <script type="text/javascript" th:src="@{/js/index.bundle.js}" ></script>
     <script type="text/javascript" th:src="@{/js/app.js}"></script>
-    <script type="text/javascript" th:src="@{/js/goods/detailGoods.js}" ></script>
     <script type="text/javascript" th:src="@{/js/layer/layer.js}" ></script>
+    <script type="text/javascript" th:src="@{/js/goods/detailGoods.js}" ></script>
     <link rel="stylesheet" th:href="@{/css/materialize-icon.css}" />
     <link rel="stylesheet" th:href="@{/css/detail.css}" />
 </head>
@@ -129,9 +129,9 @@
                 <div class="value" th:text="${seller.qq}"></div>
             </div>
             <div>
-                <div class="base-blue z-depth-1 attr">
-                    <i class="iconfont"></i>
-                </div>
+<!--                <div class="base-blue z-depth-1 attr">-->
+<!--                    <i class="iconfont"></i>-->
+<!--                </div>-->
                 <div class="value"></div>
             </div>
         </div>
@@ -145,7 +145,7 @@
     <p class="section" th:text="${goodsExtend.goods.describle}"></p>
     <p class="section"></p>
     <p class="section">
-        xxx
+        联系我时请注明是在阿师校园二手交易平台上看到的！
     </p>
 </div>
 <!--
@@ -232,5 +232,7 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" th:src="@{/js/usercenter.js}" ></script>
 </body>
 </html>

@@ -32,7 +32,6 @@
         *
         from t_shop_goods
         where id = #{id,jdbcType=INTEGER}
-        <include refid="Factor"></include>
     </select>
     <select id="searchGoods" resultMap="ResultMapWithBLOBs" parameterType="String" >
         select
@@ -233,7 +232,16 @@
         end_time = #{endTime,jdbcType=VARCHAR},
         polish_time = #{polishTime,jdbcType=VARCHAR},
         commet_num = #{commetNum,jdbcType=INTEGER},
-        describle = #{describle,jdbcType=LONGVARCHAR}
+        describle = #{describle,jdbcType=LONGVARCHAR},
+        state = #{state,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="searchGoodsByName" resultMap="ResultMapWithBLOBs">
+        select * from t_shop_goods where state = 0
+        <if test="goodsName != null and goodsName != ''" >
+            AND name like CONCAT('%', #{goodsName}, '%')
+        </if>
+    </select>
+
 </mapper>

@@ -9,6 +9,7 @@
     <script type="text/javascript" th:src="@{/js/index.bundle.js}" ></script>
     <script type="text/javascript" th:src="@{/js/layer/layer.js}" ></script>
     <link rel="stylesheet" th:href="@{/css/materialize-icon.css}" />
+    <link rel="stylesheet" th:href="@{/js/layui/css/layui.css}" />
     <link rel="stylesheet" th:href="@{/css/user.css}" />
 </head>
     <script>
@@ -108,35 +109,31 @@
     </div>
 </div>
 <!--
-    时间：2018/01/04 23:51:14
     描述：右侧显示部分
 -->
 <div class="main-content">
     <!--
-        时间：2018/01/04 23:51:14
         描述：右侧banner（图片）部分
     -->
     <div class="slider-wapper">
         <div class="slider" style="height: 440px; width: 920px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
             <ul class="slides" style="height: 400px;">
                 <li class="active" style="opacity: 1;">
-                    <a href="">
-                        <div class="bannerimg">
-                            <ul class="bannerul">
-                                <p class="text1">亲爱的同学们：</p>
-                                <p class="text2">欢迎来到阿坝师范学院二手交易平台。临近毕业季的你</p>
-                                <p class="text3">是否有太多的闲置想与校友分享，为了追求更好的校园服务</p>
-                                <p class="text4">我们打造了一个全新的校园平台——<span>阿坝师院二手交易平台</span></p>
-                                <p class="text5">这里有更多的闲置分享，更自由的校园话题讨论，你想要的，都在这里。</p>
-                            </ul>
+                    <div class="layui-carousel" id="carousel" lay-filter="carousel">
+                        <div carousel-item="">
+                            <div><img th:src="@{/img/1.jpg}"/></div>
+                            <div><img th:src="@{/img/2.jpg}"/></div>
+                            <div><img th:src="@{/img/3.jpg}"/></div>
+                            <div><img th:src="@{/img/4.jpg}"/></div>
+                            <div><img th:src="@{/img/5.jpg}"/></div>
                         </div>
-                    </a>
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
     <!--
-        时间：2018/01/05 11:17:51
+
         描述：最新发布
     -->
     <div class="index-title">
@@ -165,7 +162,6 @@
         </div>
     </div>
     <!--
-        时间：2018/01/05 15:19:36
         描述：闲置数码
     -->
     <div class="index-title">
@@ -178,7 +174,6 @@
             <div class="card col">
                 <a th:href="@{'/goods/goodsId/'+${item.goods.id}}">
                     <div class="card-image">
-                        <!--<img th:src="@{/upload/${item.images[0].imgUrl}}" />-->
                         <img th:src="@{'/upload/'+${item.images[0].imgUrl}}" />
                     </div>
                     <div class="card-content item-price" th:text="${item.goods.price}"></div>
@@ -194,7 +189,6 @@
         </div>
     </div>
     <!--
-        时间：2018/01/05 15:43:59
         描述：校园代步
     -->
     <div class="index-title">
@@ -223,7 +217,6 @@
         </div>
     </div>
     <!--
-        时间：2018/01/05 15:59:28
         描述：电器日用
     -->
     <div class="index-title">
@@ -252,7 +245,6 @@
         </div>
     </div>
     <!--
-        时间：2018/01/05 16:00:15
         描述：图书教材
     -->
     <div class="index-title">
@@ -281,7 +273,6 @@
         </div>
     </div>
     <!--
-        时间：2018/01/05 16:03:19
         描述：美妆衣物
     -->
     <div class="index-title">
@@ -310,7 +301,6 @@
         </div>
     </div>
     <!--
-        时间：2018/01/05 16:06:57
         描述：运动棋牌
     -->
     <div class="index-title">
@@ -339,7 +329,6 @@
         </div>
     </div>
     <!--
-        时间：2018/01/05 16:10:50
         描述：票券小物
     -->
     <div class="index-title">
@@ -369,7 +358,21 @@
     </div>
 </div>
 
+<script type="text/javascript" th:src="@{/js/layui/layui.js}" ></script>
 <script type="text/javascript" th:src="@{/js/usercenter.js}" ></script>
 
+<script>
+    layui.use('carousel', function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#carousel'
+            ,width: '100%' //设置容器宽度
+            ,height: 420
+            ,arrow: 'none'
+            ,autoplay: true
+        });
+    });
+</script>
 </body>
 </html>

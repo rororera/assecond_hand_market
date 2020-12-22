@@ -276,6 +276,7 @@ public class GoodsController {
         User cur_user = (User)request.getSession().getAttribute("cur_user");
 
         goods.setUserId(cur_user.getId());
+        goods.setCommetNum(0);
         int i = goodsService.addGood(goods,10);//在goods表中插入物品
         //返回插入的该物品的id
         int goodsId = goods.getId();
@@ -314,8 +315,8 @@ public class GoodsController {
             //新的图片名称
             String newFileName = UUID.randomUUID() + oldFileName.substring(oldFileName.lastIndexOf("."));
             //新图片
-//            File newFile = new File(file_path+"/"+newFileName);
-            File newFile = new File(file_path+newFileName);
+            File newFile = new File(file_path+"/"+newFileName);
+//            File newFile = new File(file_path+newFileName);
             //将内存中的数据写入磁盘
             myfile.transferTo(newFile);
             //将新图片名称返回到前端
@@ -345,7 +346,10 @@ public class GoodsController {
     @ResponseBody
     public AjaxResult offGoods(@PathVariable int id) {
         AjaxResult ajaxResult = new AjaxResult();
-        goodsService.deleteGoodsByPrimaryKey(id);
+//        goodsService.deleteGoodsByPrimaryKey(id);
+        Goods goods = goodsService.getGoodsByPrimaryKey(id);
+        goods.setState(1);
+        goodsService.offGoods(goods);
         return new AjaxResult().setData(true);
     }
 }

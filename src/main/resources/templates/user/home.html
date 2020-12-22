@@ -36,7 +36,7 @@
                 <span class="name" th:text="${cur_user.username}"></span>
                 <span class="school">阿坝师范学院</span>
                 <span class="name" th:text="'闲置数量：'+${cur_user.goodsNum}"></span>
-                <span class="fa fa-share-alt">"快去分享一下"</span>
+<!--                <span class="fa fa-share-alt">"快去分享一下"</span>-->
             </div>
             <div class="home_nav">
                 <ul>
@@ -77,12 +77,19 @@
         <div id="user_content">
             <div class="share">
                 <div class="publish">
-                    <div class="pub_content">
-                        123123123
-                    </div>
+<!--                    <div class="pub_content">-->
+<!--                        <div class="text_pub lead emoji-picker-container">-->
+<!--                            <input type="text" name="text" data-emojiable="converted" class="form-control" data-type="original-input" style="display: none;"/>-->
+<!--                            <div class="emoji-wysiwyg-editor form-control" data-type="input" contenteditable="true"></div>-->
+<!--                            <i class="emoji-picker-icon emoji-picker face" data-type="picker"></i>-->
+<!--                            <div class="tag"></div>-->
+<!--                        </div>-->
+<!--                        <div class="img_pub">-->
+<!--                            <ul></ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+123
                 </div>
-
-
                 <!--
                     描述：闲置商品展示
                 -->
@@ -94,10 +101,8 @@
             </div>
 
             <div class="recommend">
-                <div class="title">
-                    <span class="text">可能认识的人</span>
-                    <span class="change">换一组</span>
-                    <span class="underline"></span>
+                <div>
+                    <img th:src="@{/img/gg.png}" style="height: 600px;width: 200px"/>
                 </div>
             </div>
         </div>

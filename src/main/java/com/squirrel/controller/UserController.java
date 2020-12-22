@@ -132,7 +132,7 @@ public class UserController {
             user.setGoodsNum(0);
             user.setStatus((byte)0);
             userService.addUser(user);
-            return new AjaxResult().setData(1);
+            return new AjaxResult().setSuccess(true);
         }
         return AjaxResult.fixedError(GgeeWebError.AREADY_EXIST_PHONE);
     }

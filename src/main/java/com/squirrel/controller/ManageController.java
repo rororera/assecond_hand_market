@@ -109,6 +109,7 @@ public class ManageController {
     @RequestMapping(value="/goods/list", method= RequestMethod.GET)
     public String goodsList(HttpServletRequest request,
                             @RequestParam(value = "page", defaultValue = "1") int page,
+                            @RequestParam(value = "goodsName", required = false) String goodsName,
                             Model model) {
         User currentUser = (User) request.getSession().getAttribute(GgeeConst.CUR_USER);
         model.addAttribute(GgeeConst.CUR_USER, currentUser);
@@ -116,7 +117,7 @@ public class ManageController {
             return "/error/404";
         } else {
             PageHelper.startPage(page, GgeeConst.goodsPageSize);
-            List<Goods> goodsList = goodsService.getAllGoods();
+            List<Goods> goodsList = goodsService.searchGoodsByName(goodsName);
             List<Integer> userIds = goodsList.stream().
                     map(Goods::getUserId).collect(Collectors.toList());
             List<User> users = userService.getUsersByIds(userIds);
@@ -126,7 +127,9 @@ public class ManageController {
                 goods.setUser(id2user.get(goods.getUserId()));
             }
             PageInfo<Goods> pageInfo = new PageInfo<Goods>(goodsList);
-
+            if(!"".equals(goodsName) && goodsName != null){
+                model.addAttribute("goodsName", goodsName);
+            }
             model.addAttribute(GgeeConst.DATA, pageInfo);
             return "/manage/manage-goodsList";
         }

@@ -239,3 +239,10 @@ var manageGoodsListPage = {
     },
 
 };
+
+function search(){
+    var page = $('#pageNumber').val();
+    var goodsName = $('#queryText').val();
+    window.location.href = app.URL.manageGoodsListUrl()
+        + "?page=" + page +"&goodsName=" + goodsName;
+}
