@@ -87,7 +87,7 @@
                         <th>价格</th>
                         <th>真实价格</th>
                         <th>开始时间</th>
-                        <th>到期时间</th>
+<!--                        <th>到期时间</th>-->
                         <th>状态</th>
                         <th>评论</th>
                         <th>操作</th>
@@ -100,7 +100,7 @@
                         <td th:text="${item.price}"></td>
                         <td th:text="${item.realPrice}"></td>
                         <td th:text="${item.startTime}"></td>
-                        <td th:text="${item.endTime}"></td>
+<!--                        <td th:text="${item.endTime}"></td>-->
                         <td th:if="${item.state == 0}"><span class="label label-success">进行中</span></td>
                         <td th:if="${item.state == 1}"><span class="label label-danger">已下架</span></td>
                         <td th:if="${item.state == 2}"><span class="label label-warning">审核中</span></td>
