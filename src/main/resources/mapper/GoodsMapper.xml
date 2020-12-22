@@ -37,7 +37,7 @@
         select
         *
         from t_shop_goods
-        where name like concat('%',#{name},'%') OR describle like concat('%',#{describle},'%')
+        where name like concat('%',#{name},'%')
         <include refid="Factor"></include>
     </select>
 
