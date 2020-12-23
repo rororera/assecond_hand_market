@@ -31,19 +31,19 @@
         select
         *
         from t_shop_goods
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER} and state = 0
     </select>
     <select id="searchGoods" resultMap="ResultMapWithBLOBs" parameterType="String" >
         select
         *
         from t_shop_goods
-        where name like concat('%',#{name},'%')
+        where name like concat('%',#{name},'%') and state = 0
         <include refid="Factor"></include>
     </select>
 
     <select id="selectCountByCatelog" resultType="int">
         select COUNT(1) from t_shop_goods
-        where 1 = 1
+        where state = 0
         <if test="catelog_id != 0">
             AND catelog_id = #{catelog_id,jdbcType=INTEGER}
         </if>
@@ -58,7 +58,7 @@
 
     <select id="selectByCatelog" resultMap="ResultMapWithBLOBs">
         select * from t_shop_goods
-        where 1 = 1
+        where state = 0
         <if test="catelog_id != 0">
             AND catelog_id = #{catelog_id,jdbcType=INTEGER}
         </if>
@@ -71,15 +71,15 @@
     </select>
 
     <select id="selectAllGoods" resultMap="ResultMapWithBLOBs">
-        select * from t_shop_goods
+        select * from t_shop_goods where state = 0
     </select>
     <select id="getGoodsByUserId" resultMap="ResultMapWithBLOBs">
-        select * from t_shop_goods where user_id = #{user_id,jdbcType=INTEGER}
+        select * from t_shop_goods where user_id = #{user_id,jdbcType=INTEGER} and state = 0
     </select>
 
     <select id="selectByCatelogOrderByDate" resultMap="ResultMapWithBLOBs">
         select * from t_shop_goods
-        where catelog_id = #{catelogId,jdbcType=INTEGER}
+        where catelog_id = #{catelogId,jdbcType=INTEGER} and state = 0
         order by polish_time DESC
         limit #{limit,jdbcType=INTEGER}
     </select>
@@ -238,7 +238,14 @@
     </update>
 
     <select id="searchGoodsByName" resultMap="ResultMapWithBLOBs">
-        select * from t_shop_goods where state = 0
+        select * from t_shop_goods where state = 0 or state = 1
+        <if test="goodsName != null and goodsName != ''" >
+            AND name like CONCAT('%', #{goodsName}, '%')
+        </if>
+    </select>
+
+    <select id="searchGoodsByNameReview" resultMap="ResultMapWithBLOBs">
+        select * from t_shop_goods where state = 2
         <if test="goodsName != null and goodsName != ''" >
             AND name like CONCAT('%', #{goodsName}, '%')
         </if>

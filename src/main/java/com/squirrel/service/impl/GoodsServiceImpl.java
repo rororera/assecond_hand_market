@@ -117,5 +117,10 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.updateByPrimaryKey(goods);
     }
 
+    @Override
+    public List<Goods> searchGoodsByNameReview(String goodsName) {
+        return goodsMapper.searchGoodsByNameReview(goodsName);
+    }
+
 
 }

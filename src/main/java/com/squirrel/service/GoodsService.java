@@ -76,4 +76,6 @@ public interface GoodsService {
     List<Goods> searchGoodsByName(String goodsName);
 
     int offGoods(Goods goods);
+
+    List<Goods> searchGoodsByNameReview(String goodsName);
 }

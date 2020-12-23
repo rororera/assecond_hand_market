@@ -277,6 +277,7 @@ public class GoodsController {
 
         goods.setUserId(cur_user.getId());
         goods.setCommetNum(0);
+        goods.setState(2);
         int i = goodsService.addGood(goods,10);//在goods表中插入物品
         //返回插入的该物品的id
         int goodsId = goods.getId();

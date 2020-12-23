@@ -22,9 +22,58 @@
         <label for="password" class="sr-only">密码</label>
         <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码" required="required" />
         <br/>
+        <input type="text" hidden="hidden" value="y" name="lastLogin" />
         <button class="btn btn-lg btn-primary btn-block" type="button" onclick="login()">登录</button>
     </form>
 </div> <!-- /container -->
-<script type="text/javascript" th:src="@{/js/usercenter.js}" ></script>
+<script type="text/javascript" >
+    function login() {
+
+        var phone = $('#phone').val();
+        var password = $('#password').val();
+        if(phone == null){
+            layer.msg("账号不能为空！");
+            return;
+        }
+        if(password == null){
+            layer.msg("密码不能为空！");
+            return;
+        }
+
+        $.ajax({
+            type: "post",
+            contentType: "application/json",
+            dataType: "json",
+            url: "/user/api/login",
+            data: JSON.stringify($('#login_from').serializeObject()),
+            success: function (data) {
+                if(data.success){
+                    layer.msg("登录成功！");
+                    setTimeout(function(){
+                        location.reload();
+                    },2000);
+                }else{
+                    layer.msg(data.message);
+                }
+            }
+        });
+    }
+
+    $.fn.serializeObject = function() {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [ o[this.name] ];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    }
+</script>
 </body>
 </html>

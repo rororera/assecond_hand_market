@@ -111,5 +111,5 @@ public interface GoodsMapper {
      */
     List<Goods> searchGoodsByName(@Param("goodsName") String goodsName);
 
-
+    List<Goods> searchGoodsByNameReview(@Param("goodsName") String goodsName);
 }

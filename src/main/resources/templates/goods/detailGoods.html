@@ -103,9 +103,9 @@
         </div>
         <div class="item-contact" th:if="${cur_user == null}">
             <p class="not-login">
-                <a th:onclick="'showLogin()'">登录</a>
+                <a th:onclick="'openLogin()'">登录</a>
                 <em>或</em>
-                <a th:onclick="'showSignup()'">注册</a>
+                <a th:onclick="'openRegister()'">注册</a>
                 <em>后查看联系信息</em>
             </p>
         </div>
@@ -159,13 +159,14 @@
             <hr class="hr2" />
             <div class="comment-add row" th:if="${cur_user == null}" style="font-size: 18px;">
                 <div class="input-field col s12">
-                    <a th:onclick="'showLogin()'">登录</a>
+                    <a th:onclick="'openLogin()'">登录</a>
                     <em>或</em>
-                    <a th:onclick="'showSignup()'">注册</a>
+                    <a th:onclick="'openRegister()'">注册</a>
                     <em>后查看评论</em>
                 </div>
             </div>
             <div th:if="${cur_user != null}" class="comment-collection" th:each="item,itemStats : ${commentsList}">
+                <a name="comment"/>
                 <div class="comment-item ng-scope" th:if="${item.atuserId == 0}">
                     <div class="comment-main-content">
                         <em class="name ng-binding" th:text="${item.user.username}+':'">ggee:</em>

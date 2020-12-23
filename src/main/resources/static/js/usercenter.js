@@ -44,7 +44,6 @@ function openPwdModel(){
 }
 
 function login() {
-    console.log(JSON.stringify($('#login_from').serializeObject()))
     $.ajax({
         type: "post",
         contentType: "application/json",

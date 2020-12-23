@@ -136,8 +136,35 @@ public class ManageController {
     }
 
     /**
-     * TODO::商品审核管理
+     * 商品审核管理
      */
-
+    @RequestMapping(value="/goods/review", method= RequestMethod.GET)
+    public String reviewList(HttpServletRequest request,
+                            @RequestParam(value = "page", defaultValue = "1") int page,
+                            @RequestParam(value = "goodsName", required = false) String goodsName,
+                            Model model) {
+        User currentUser = (User) request.getSession().getAttribute(GgeeConst.CUR_USER);
+        model.addAttribute(GgeeConst.CUR_USER, currentUser);
+        if (currentUser == null || currentUser.getPower() != 90) {
+            return "/error/404";
+        } else {
+            PageHelper.startPage(page, GgeeConst.goodsPageSize);
+            List<Goods> goodsList = goodsService.searchGoodsByNameReview(goodsName);
+            List<Integer> userIds = goodsList.stream().
+                    map(Goods::getUserId).collect(Collectors.toList());
+            List<User> users = userService.getUsersByIds(userIds);
+            Map<Integer, User> id2user = users.stream().
+                    collect(Collectors.toMap(User::getId, user -> user));
+            for (Goods goods : goodsList) {
+                goods.setUser(id2user.get(goods.getUserId()));
+            }
+            PageInfo<Goods> pageInfo = new PageInfo<Goods>(goodsList);
+            if(!"".equals(goodsName) && goodsName != null){
+                model.addAttribute("goodsName", goodsName);
+            }
+            model.addAttribute(GgeeConst.DATA, pageInfo);
+            return "/manage/manage-reviewList";
+        }
+    }
 
 }

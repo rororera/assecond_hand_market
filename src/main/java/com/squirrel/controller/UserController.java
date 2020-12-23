@@ -96,14 +96,20 @@ public class UserController {
             String password = user.getPassword();
             User cur_user = userService.getUserByPhone(phone);
             if(cur_user != null) {
-                String pwd = MD5.md5(password);
-                if(pwd.equals(cur_user.getPassword())) {
-                    //设置单位为秒，设置为-1永不过期
-                    request.getSession().setMaxInactiveInterval(24*60*60);    //24小时
-                    request.getSession().setAttribute(GgeeConst.CUR_USER,cur_user);
-                    ajaxResult.setData(cur_user);
-                } else {
-                    return AjaxResult.fixedError(GgeeWebError.WRONG_PASSWORD);
+                if("y".equals(user.getLastLogin())){
+                    if(!"90".equals(cur_user.getPower().toString())){
+                        return AjaxResult.fixedError(GgeeWebError.IS_NOT_MANAGER);
+                    }
+                }else{
+                    String pwd = MD5.md5(password);
+                    if(pwd.equals(cur_user.getPassword())) {
+                        //设置单位为秒，设置为-1永不过期
+                        request.getSession().setMaxInactiveInterval(24*60*60);    //24小时
+                        request.getSession().setAttribute(GgeeConst.CUR_USER,cur_user);
+                        ajaxResult.setData(cur_user);
+                    } else {
+                        return AjaxResult.fixedError(GgeeWebError.WRONG_PASSWORD);
+                    }
                 }
             } else {
                 return AjaxResult.fixedError(GgeeWebError.WRONG_USERNAME);
