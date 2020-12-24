@@ -1,7 +1,7 @@
 package com.squirrel.dto;
 
 /**
- * @author longchuan
+ * @author nbb
  * @title: PasswordDTO
  * @projectName springboot-squirrel
  * @description:
