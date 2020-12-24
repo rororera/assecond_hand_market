@@ -106,7 +106,11 @@
                         <td th:if="${item.state == 2}"><span class="label label-warning">审核中</span></td>
                         <td th:text="${item.commetNum}"></td>
                         <td>
-                            <button type="button" class="btn btn-danger btn-xs"
+                            <button th:if="${item.state == 1}" type="button" class="btn btn-primary btn-xs"
+                                    th:onclick="'upGoodsAction('+${item.id}+')'"><i
+                                    class="fa fa-trash"></i>重新上架
+                            </button>
+                            <button th:if="${item.state == 0}" type="button" class="btn btn-danger btn-xs"
                                     th:onclick="'manageGoodsListPage.offGoodsAction('+${item.id}+')'"><i
                                     class="fa fa-trash"></i>下架
                             </button>

@@ -353,4 +353,16 @@ public class GoodsController {
         goodsService.offGoods(goods);
         return new AjaxResult().setData(true);
     }
+
+    //下架商品
+    @RequestMapping("/api/upGoods/{id}")
+    @ResponseBody
+    public AjaxResult upGoods(@PathVariable int id) {
+        AjaxResult ajaxResult = new AjaxResult();
+//        goodsService.deleteGoodsByPrimaryKey(id);
+        Goods goods = goodsService.getGoodsByPrimaryKey(id);
+        goods.setState(0);
+        goodsService.upGoods(goods);
+        return new AjaxResult().setData(true);
+    }
 }

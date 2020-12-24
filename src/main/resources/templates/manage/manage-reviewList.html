@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>阿师校园二手交易平台管理平台-用户管理</title>
+    <title>阿师校园二手交易平台管理平台-商品审核</title>
     <!--<link rel="stylesheet" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" />-->
     <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
 
@@ -105,9 +105,13 @@
                         <td th:if="${item.state == 2}"><span class="label label-warning">审核中</span></td>
                         <td th:text="${item.commetNum}"></td>
                         <td>
+                            <button type="button" class="btn btn-primary btn-xs"
+                                    th:onclick="'passreview('+${item.id}+')'"><i
+                                    class="fa fa-trash"></i>通过
+                            </button>
                             <button type="button" class="btn btn-danger btn-xs"
-                                    th:onclick="'manageGoodsListPage.offGoodsAction('+${item.id}+')'"><i
-                                    class="fa fa-trash"></i>下架
+                                    th:onclick="'nopassreview('+${item.id}+')'"><i
+                                    class="fa fa-trash"></i>不通过
                             </button>
                         </td>
                     </tr>

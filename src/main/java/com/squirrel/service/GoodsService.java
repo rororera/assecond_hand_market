@@ -78,4 +78,6 @@ public interface GoodsService {
     int offGoods(Goods goods);
 
     List<Goods> searchGoodsByNameReview(String goodsName);
+
+    int upGoods(Goods goods);
 }

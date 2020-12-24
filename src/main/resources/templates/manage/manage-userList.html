@@ -80,6 +80,7 @@
                         <th>用户名</th>
                         <th>手机号</th>
                         <th>QQ</th>
+                        <th>邮箱</th>
                         <th>注册时间</th>
                         <th>商品数量</th>
                         <th>权限</th>
@@ -91,6 +92,7 @@
                         <td th:text="${item.username}"></td>
                         <td th:text="${item.phone}"></td>
                         <td th:text="${item.qq}"></td>
+                        <td th:text="${item.email}"></td>
                         <td th:text="${item.createAt}"></td>
                         <td th:text="${item.goodsNum}"></td>
                         <td th:if="${item.power == 10 and item.status == 0}"><span class="label label-info">普通</span>

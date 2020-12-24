@@ -246,3 +246,27 @@ function search(){
     window.location.href = app.URL.manageGoodsListUrl()
         + "?page=" + page +"&goodsName=" + goodsName;
 }
+
+function upGoodsAction(id){
+    $.ajax({
+        url : "/goods/api/upGoods/"+id,
+        type : "post",
+        dataType: "json",
+        contentType : "application/json;charset=UTF-8",
+        success:function(result) {
+            if (result && result['success']) {
+                // 验证通过 刷新页面
+                window.location.reload();
+            } else {
+                $('#loginModalErrorMessage').html('<i class="close icon"></i><div class="header">错误提示</div>\n' +
+                    '                <p>'+result.message+'</p>');
+                $('#loginModalErrorMessage').removeClass('hidden');
+            }
+        },
+        error:function(result){
+            $('#loginModalErrorMessage').html('<i class="close icon"></i><div class="header">错误提示</div>\n' +
+                '                <p>'+result.message+'</p>');
+            $('#loginModalErrorMessage').removeClass('hidden');
+        }
+    });
+}
