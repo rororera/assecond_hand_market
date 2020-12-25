@@ -31,7 +31,7 @@
         select
         *
         from t_shop_goods
-        where id = #{id,jdbcType=INTEGER} and state = 0
+        where id = #{id,jdbcType=INTEGER} and state = 0 or state = 1
     </select>
     <select id="searchGoods" resultMap="ResultMapWithBLOBs" parameterType="String" >
         select
