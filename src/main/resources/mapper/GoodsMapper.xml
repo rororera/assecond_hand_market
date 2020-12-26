@@ -31,7 +31,7 @@
         select
         *
         from t_shop_goods
-        where id = #{id,jdbcType=INTEGER} and state = 0 or state = 1
+        where id = #{id,jdbcType=INTEGER}
     </select>
     <select id="searchGoods" resultMap="ResultMapWithBLOBs" parameterType="String" >
         select
@@ -74,7 +74,7 @@
         select * from t_shop_goods where state = 0
     </select>
     <select id="getGoodsByUserId" resultMap="ResultMapWithBLOBs">
-        select * from t_shop_goods where user_id = #{user_id,jdbcType=INTEGER} and state = 0
+        select * from t_shop_goods where user_id = #{user_id,jdbcType=INTEGER}
     </select>
 
     <select id="selectByCatelogOrderByDate" resultMap="ResultMapWithBLOBs">
@@ -92,11 +92,11 @@
     <insert id="insert" parameterType="com.squirrel.pojo.Goods" useGeneratedKeys="true" keyProperty="id">
         insert into t_shop_goods (id, catelog_id, user_id,
         name, price, real_price, start_time,
-        end_time, polish_time, commet_num, describle)
+        end_time, polish_time, commet_num, describle, state)
         values (#{id,jdbcType=INTEGER}, #{catelogId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
         #{name,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, #{realPrice,jdbcType=REAL}, #{startTime,jdbcType=VARCHAR},
         #{endTime,jdbcType=VARCHAR}, #{polishTime,jdbcType=VARCHAR}, #{commetNum,jdbcType=INTEGER}, #{describle,jdbcType=LONGVARCHAR}
-        )
+        , #{state,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.squirrel.pojo.Goods" >
         insert into t_shop_goods

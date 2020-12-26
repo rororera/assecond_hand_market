@@ -74,6 +74,7 @@
         <a th:href="@{'/goods/catelog/'+${catelog.id}}" th:text="${catelog.name}"></a>
         <em>></em>
         <a th:text="${goodsExtend.goods.name}"></a>
+
     </div>
     <div class="col s6">
         <div class="slider" style="height: 440px;">
@@ -89,7 +90,11 @@
         </div>
     </div>
     <div class="col s6">
-        <h1 class="item-name" th:text="${goodsExtend.goods.name}"></h1>
+        <div >
+            <h1 class="item-name" th:text="${goodsExtend.goods.name}" style="float: left"></h1>
+            <h1 class="item-name" th:if="${goodsExtend.goods.state == 2}" style="color: red;">（审核中！）</h1>
+        </div>
+        <div style="clear: both"></div>
         <h2 class="item-price" th:text="${goodsExtend.goods.price}"></h2>
         <div class="item-public-info">
             <p class="bargain">可讲价</p>

@@ -27,6 +27,8 @@ public class GoodsServiceImpl implements GoodsService {
         String endTime = DateUtil.getLastTime(startTime, duration);
         String polishTime = startTime;
         //添加上架时间，下架时间，擦亮时间
+        goods.setCommetNum(0);
+        goods.setState(2);
         goods.setPolishTime(polishTime);
         goods.setEndTime(endTime);
         goods.setStartTime(startTime);

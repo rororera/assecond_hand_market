@@ -276,8 +276,6 @@ public class GoodsController {
         User cur_user = (User)request.getSession().getAttribute("cur_user");
 
         goods.setUserId(cur_user.getId());
-        goods.setCommetNum(0);
-        goods.setState(2);
         int i = goodsService.addGood(goods,10);//在goods表中插入物品
         //返回插入的该物品的id
         int goodsId = goods.getId();
@@ -347,22 +345,41 @@ public class GoodsController {
     @ResponseBody
     public AjaxResult offGoods(@PathVariable int id) {
         AjaxResult ajaxResult = new AjaxResult();
-//        goodsService.deleteGoodsByPrimaryKey(id);
         Goods goods = goodsService.getGoodsByPrimaryKey(id);
         goods.setState(1);
         goodsService.offGoods(goods);
         return new AjaxResult().setData(true);
     }
 
-    //下架商品
+    //重新上架商品
     @RequestMapping("/api/upGoods/{id}")
     @ResponseBody
     public AjaxResult upGoods(@PathVariable int id) {
         AjaxResult ajaxResult = new AjaxResult();
-//        goodsService.deleteGoodsByPrimaryKey(id);
         Goods goods = goodsService.getGoodsByPrimaryKey(id);
         goods.setState(0);
         goodsService.upGoods(goods);
         return new AjaxResult().setData(true);
     }
+
+    //审核通过商品
+    @RequestMapping("/api/passReviewGoods/{id}")
+    @ResponseBody
+    public AjaxResult passReviewGoods(@PathVariable int id) {
+        AjaxResult ajaxResult = new AjaxResult();
+        Goods goods = goodsService.getGoodsByPrimaryKey(id);
+        goods.setState(0);
+        goodsService.upGoods(goods);
+        return new AjaxResult().setData(true);
+    }
+
+    //审核不通过商品
+    @RequestMapping("/api/noPassReviewGoods/{id}")
+    @ResponseBody
+    public AjaxResult noPassReviewGoods(@PathVariable int id) {
+        AjaxResult ajaxResult = new AjaxResult();
+        goodsService.deleteGoodsByPrimaryKey(id);
+        return new AjaxResult().setData(true);
+    }
+
 }

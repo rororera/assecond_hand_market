@@ -137,6 +137,37 @@
         </div>
     </div>
 </div>
+
+<script>
+    function passreview(id){
+        $.ajax({
+            url : "/goods/api/passReviewGoods/"+id,
+            type : "post",
+            dataType: "json",
+            contentType : "application/json;charset=UTF-8",
+            success:function(result) {
+
+                    // 验证通过 刷新页面
+                    window.location.reload();
+
+            }
+        });
+    }
+
+    function nopassreview(id){
+        $.ajax({
+            url : "/goods/api/noPassReviewGoods/"+id,
+            type : "post",
+            dataType: "json",
+            contentType : "application/json;charset=UTF-8",
+            success:function(result) {
+
+                    window.location.reload();
+
+            }
+        });
+    }
+</script>
 </body>
 </html>
 
